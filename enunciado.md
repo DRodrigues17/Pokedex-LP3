@@ -43,11 +43,11 @@
 - Retorna o Pokémon
 
 
-
 #### DELETE - ...pokedex/api/v1/pokemons/{nome}:
 - Remove um Pokémon, a partir do Nome, no Banco de Dados da sua API (interna)
 - Caso o Pokémon não exista, retornar HTTP Status Code 400 (com uma mensagem explicativa)
 - Para a remoção do Pokémon, utilizar estratégia Lógica (ver sobre Exclusão Lógica)
+
 
 #### GET - Implementar um Endpoint que:
 - Retorna todos os Pokémons que tem mais de X KGs e que estão no Banco de Dados da sua API (interna)
@@ -61,4 +61,4 @@
 
 #### OBSERVAÇÃO:
 - Deve existir uma tabela chamada Log. Essa tabela armazenará Logs das operações DELETE (remoção de Pokémons) da API.
-- Para cada remoção de Pokémon (da API interna), armazenar: data e hora da remoção e o ID e Nome  do Pokémon removido.
+- Para cada remoção de Pokémon (da API interna), armazenar: data e hora da remoção e o ID e Nome do Pokémon removido.

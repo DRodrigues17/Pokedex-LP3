@@ -1,4 +1,4 @@
-package br.com.fundatec.pokeApi;
+package br.com.fundatec.pokeapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

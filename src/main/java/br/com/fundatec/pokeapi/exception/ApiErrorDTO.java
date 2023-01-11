@@ -1,4 +1,4 @@
-package br.com.fundatec.pokeApi.exception;
+package br.com.fundatec.pokeapi.exception;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

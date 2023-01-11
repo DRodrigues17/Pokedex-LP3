@@ -1,4 +1,4 @@
-package br.com.fundatec.pokeApi.model;
+package br.com.fundatec.pokeapi.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

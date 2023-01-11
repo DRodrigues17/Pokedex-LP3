@@ -1,6 +1,5 @@
-package br.com.fundatec.pokeApi.dto;
+package br.com.fundatec.pokeapi.dto;
 
-import br.com.fundatec.pokeApi.dto.MoveDTO;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 

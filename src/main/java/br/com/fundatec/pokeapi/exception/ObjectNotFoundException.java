@@ -1,4 +1,4 @@
-package br.com.fundatec.pokeApi.exception;
+package br.com.fundatec.pokeapi.exception;
 
 public class ObjectNotFoundException extends RuntimeException {
 

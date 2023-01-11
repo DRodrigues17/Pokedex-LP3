@@ -1,4 +1,4 @@
-package br.com.fundatec.pokeApi.model;
+package br.com.fundatec.pokeapi.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
