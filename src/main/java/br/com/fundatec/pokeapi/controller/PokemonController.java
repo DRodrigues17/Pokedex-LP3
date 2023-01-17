@@ -31,7 +31,7 @@ public class PokemonController {
         return ResponseEntity.ok(
                 Response.builder().timestamp(LocalDateTime.now())
                         .data(Map.of("id",
-                                converter.convert(service.findById(id))))
+                                service.findById(id)))
                         .message("pokemons presentes na API com o id " + id)
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value()).build()
@@ -43,7 +43,7 @@ public class PokemonController {
         return ResponseEntity.ok(
                 Response.builder().timestamp(LocalDateTime.now())
                         .data(Map.of("name",
-                                converter.convert(service.findByName(name))))
+                                service.findByName(name)))
                         .message("pokemon presente na API com o nome " + name)
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value()).build()

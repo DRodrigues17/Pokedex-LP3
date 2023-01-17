@@ -1,5 +1,6 @@
 package br.com.fundatec.pokeapi.dto.pokemon;
 
+
 import br.com.fundatec.pokeapi.dto.MovesDTO;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -16,7 +17,6 @@ import java.util.Collection;
 public class PokemonResponse {
 
     private Integer id;
-
     private String name;
     private int height;
     private int weight;
