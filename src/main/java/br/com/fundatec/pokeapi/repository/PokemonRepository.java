@@ -8,8 +8,9 @@ import java.util.List;
 
 public interface PokemonRepository extends MongoRepository<Pokemon, Integer> {
 
+    Optional<Pokemon> findByExternalId(Integer externalId);
     Optional<Pokemon> findByName(String nome);
-    List<Pokemon> findByWeigth(Integer weigth);
-    List<Pokemon> findByHeigth(Integer heigth);
+    List<Pokemon> findByWeight(Integer weight);
+    List<Pokemon> findByHeight(Integer height);
 
 }

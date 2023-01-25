@@ -14,7 +14,8 @@ import java.util.Collection;
 public class Pokemon {
 
     @Id
-    private Integer id;
+    private String id;
+    private Integer externalId;
     private String name;
     private int height;
     private int weight;

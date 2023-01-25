@@ -1,9 +1,5 @@
 package br.com.fundatec.pokeapi.controller;
 
-import br.com.fundatec.pokeapi.dto.pokemon.PokemonRequest;
-import br.com.fundatec.pokeapi.dto.pokemon.PokemonResponse;
-import br.com.fundatec.pokeapi.dto.pokemon.converter.PokemonConverter;
-import br.com.fundatec.pokeapi.model.Pokemon;
 import br.com.fundatec.pokeapi.model.Response;
 import br.com.fundatec.pokeapi.service.PokemonService;
 import lombok.RequiredArgsConstructor;
@@ -21,10 +17,7 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 @RequiredArgsConstructor
 public class PokemonController {
 
-
     private final PokemonService service;
-    private final PokemonConverter<Pokemon, PokemonResponse, PokemonRequest> converter;
-
 
     @GetMapping("/id/{id}")
     public ResponseEntity<Response> findById(@PathVariable("id") int id) {
@@ -32,7 +25,7 @@ public class PokemonController {
                 Response.builder().timestamp(LocalDateTime.now())
                         .data(Map.of("id",
                                 service.findById(id)))
-                        .message("pokemons presentes na API com o id " + id)
+                        .message("pokemon presente na API com o id " + id)
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value()).build()
         );
@@ -55,9 +48,7 @@ public class PokemonController {
         return ResponseEntity.ok(
                 Response.builder().timestamp(LocalDateTime.now())
                         .data(Map.of("pokemons", service
-                                .findByWigth(hectograma)
-                                .stream()
-                                .map(converter::convert).toList()))
+                                .findByWeigth(hectograma)))
                         .message("pokemons presentes na API o peso de " + hectograma+ " em hectogramas")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value()).build()
@@ -69,9 +60,7 @@ public class PokemonController {
         return ResponseEntity.ok(
                 Response.builder().timestamp(LocalDateTime.now())
                         .data(Map.of("pokemons", service
-                                .findByHeigth(decimetros)
-                                .stream()
-                                .map(converter::convert).toList()))
+                                .findByHeigth(decimetros)))
                         .message("pokemons presentes na API com a altura de " + decimetros + " decimetros")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value()).build()

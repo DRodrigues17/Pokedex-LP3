@@ -1,18 +1,16 @@
 package br.com.fundatec.pokeapi.service;
 
 import br.com.fundatec.pokeapi.client.PokemonClient;
-import br.com.fundatec.pokeapi.dto.pokemon.PokemonRequest;
-import br.com.fundatec.pokeapi.dto.pokemon.PokemonResponse;
-import br.com.fundatec.pokeapi.dto.pokemon.converter.PokemonConverter;
-import br.com.fundatec.pokeapi.exception.ObjectNotFoundException;
-import br.com.fundatec.pokeapi.model.Pokemon;
+import br.com.fundatec.pokeapi.dto.PokemonDTO;
+import br.com.fundatec.pokeapi.dto.converter.PokemonConverter;
 import br.com.fundatec.pokeapi.repository.PokemonRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -23,33 +21,41 @@ public class PokemonService {
 
     private final PokemonRepository repository;
     private final PokemonClient client;
+    private final PokemonConverter pokemonConverter;
 
-    private final PokemonConverter<Pokemon, PokemonResponse, PokemonRequest> converter;
+    public Optional<PokemonDTO> findById(Integer id) {
+        Optional<PokemonDTO> pokemonOptional = repository.findByExternalId(id).map(pokemonConverter::convertToDTO);
+        if (pokemonOptional.isEmpty()) {
+            pokemonOptional = client.getPokemonById(id);
+            repository.save(pokemonOptional.map(pokemonConverter::convertToEntity).get());
+        }
+        return pokemonOptional;
+    }
 
-    public Optional<PokemonResponse> findById(Integer id) {
+    public Optional<PokemonDTO> findByName(String name) {
+        name = StringUtils.capitalize(name);
+        Optional<PokemonDTO> pokemonOptional = repository.findByName(name).map(pokemonConverter::convertToDTO);
+        if (pokemonOptional.isEmpty()) {
+            pokemonOptional = client.getPokemonByName(name.toLowerCase());
+            repository.save(pokemonOptional.map(pokemonConverter::convertToEntity).get());
 
-        return Optional.ofNullable(Optional.of(repository.findById(id)
-                        .map(converter::convert))
-                .orElseGet(() -> client.getPokemonById(id))
-                .orElseThrow(() -> new ObjectNotFoundException(id.toString())));
+        }
+        return pokemonOptional;
 
     }
 
-    public Optional<PokemonResponse> findByName(String name) {
-
-        return Optional.ofNullable(Optional.of(repository.findByName(name)
-                        .map(converter::convert))
-                .orElseGet(() -> client.getPokemonByName(name))
-                .orElseThrow(() -> new ObjectNotFoundException(name)));
-
+    public List<PokemonDTO> findByWeigth(Integer hectogramas){
+        return repository.findByWeight(hectogramas)
+                .stream()
+                .map(pokemonConverter::convertToDTO)
+                .toList();
     }
 
-    public Collection<Pokemon> findByWigth(Integer hectogramas){
-        return repository.findByWeigth(hectogramas);
-    }
-
-    public Collection<Pokemon> findByHeigth(Integer decimetros){
-            return repository.findByHeigth(decimetros);
+    public List<PokemonDTO> findByHeigth(Integer decimetros){
+            return repository.findByHeight(decimetros)
+                    .stream()
+                    .map(pokemonConverter::convertToDTO)
+                    .toList();
     }
 
     public boolean deleteById(int id) {

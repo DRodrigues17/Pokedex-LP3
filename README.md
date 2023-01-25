@@ -26,3 +26,13 @@ These additional references should also help you:
 para acessar a api via swagger, acesse a seguinte url:
 >
 
+urls via bowrser
+> localhost:8081/pokedex/api/v1/pokemons/id/{id}
+
+> localhost:8081/pokedex/api/v1/pokemons/name/{name}
+
+> localhost:8081/pokedex/api/v1/pokemons/list/peso/{hectograma}
+
+> localhost:8081/pokedex/api/v1/pokemons/list/altura/{decimetros}
+
+> localhost:8081/pokedex/api/v1/pokemons/delete/{id}
