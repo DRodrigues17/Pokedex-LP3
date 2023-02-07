@@ -38,6 +38,13 @@ public class ExceptionHandlerAdvice {
         return new ResponseEntity<>(buildError("Este método é impossivel de ser realizado"), HttpStatus.METHOD_NOT_ALLOWED);
     }
 
+    @ExceptionHandler(IllegalStateException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ApiErrorDTO> handleEmptyList(Throwable e) {
+        logger.error(e.getMessage());
+        return new ResponseEntity<>(buildError("Nenhum pokemon se encaixa nesses parametros"), HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(FeignException.class)
     public ResponseEntity<ApiErrorDTO> feignClientExceptionHandler(FeignException exception) {
         logger.error(exception.getMessage());

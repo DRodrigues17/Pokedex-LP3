@@ -13,7 +13,7 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @Data
 @SuperBuilder
 @JsonInclude(NON_NULL)
-public class Response {
+public class BaseResponse {
 
     protected LocalDateTime timestamp;
 

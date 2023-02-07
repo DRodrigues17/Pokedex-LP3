@@ -24,7 +24,7 @@ public class PokemonService {
     private final PokemonConverter pokemonConverter;
 
     public Optional<PokemonDTO> findById(Integer id) {
-        Optional<PokemonDTO> pokemonOptional = repository.findByExternalId(id).map(pokemonConverter::convertToDTO);
+        Optional<PokemonDTO> pokemonOptional = repository.findByExternalIdAndDeletedFalse(id).map(pokemonConverter::convertToDTO);
         if (pokemonOptional.isEmpty()) {
             pokemonOptional = client.getPokemonById(id);
             repository.save(pokemonOptional.map(pokemonConverter::convertToEntity).get());
@@ -34,7 +34,7 @@ public class PokemonService {
 
     public Optional<PokemonDTO> findByName(String name) {
         name = StringUtils.capitalize(name);
-        Optional<PokemonDTO> pokemonOptional = repository.findByName(name).map(pokemonConverter::convertToDTO);
+        Optional<PokemonDTO> pokemonOptional = repository.findByNameAndDeletedFalse(name).map(pokemonConverter::convertToDTO);
         if (pokemonOptional.isEmpty()) {
             pokemonOptional = client.getPokemonByName(name.toLowerCase());
             repository.save(pokemonOptional.map(pokemonConverter::convertToEntity).get());
@@ -44,18 +44,28 @@ public class PokemonService {
 
     }
 
-    public List<PokemonDTO> findByWeigth(Integer hectogramas){
-        return repository.findByWeight(hectogramas)
+    public List<PokemonDTO> findByWeight(Integer quilogramas){
+        Integer hectogramas = quilogramas/10;
+        List<PokemonDTO> pokemonList = repository.findByWeightAndDeletedFalse(hectogramas)
                 .stream()
                 .map(pokemonConverter::convertToDTO)
                 .toList();
+        if(pokemonList.isEmpty()){
+            throw new IllegalStateException();
+        }
+        return pokemonList;
     }
 
-    public List<PokemonDTO> findByHeigth(Integer decimetros){
-            return repository.findByHeight(decimetros)
-                    .stream()
-                    .map(pokemonConverter::convertToDTO)
-                    .toList();
+    public List<PokemonDTO> findByHeight(Integer metros){
+        Integer decimetros = metros/10;
+        List<PokemonDTO> pokemonList =repository.findByHeightAndDeletedFalse(decimetros)
+                .stream()
+                .map(pokemonConverter::convertToDTO)
+                .toList();
+        if(pokemonList.isEmpty()){
+            throw new IllegalStateException();
+        }
+        return pokemonList;
     }
 
     public boolean deleteById(int id) {

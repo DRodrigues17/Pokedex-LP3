@@ -6,6 +6,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Builder
@@ -20,4 +21,7 @@ public class Pokemon {
     private int height;
     private int weight;
     private Collection<MovesDTO> moves;
+    private boolean deleted;
+    private LocalDateTime deletedAt;
+    private LocalDateTime updatedAt;
 }

@@ -23,16 +23,16 @@ These additional references should also help you:
 * [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
 
 
-para acessar a api via swagger, acesse a seguinte url:
->
+### para acessar a api via swagger, acesse a seguinte url:
+>localhost:8081/pokedex/api/v1/swagger-ui.html
 
-urls via bowrser
+### urls via bowrser ou postman/insomnia
 > localhost:8081/pokedex/api/v1/pokemons/id/{id}
 
 > localhost:8081/pokedex/api/v1/pokemons/name/{name}
 
-> localhost:8081/pokedex/api/v1/pokemons/list/peso/{hectograma}
+> localhost:8081/pokedex/api/v1/pokemons/list/weight/{hectograma}
 
-> localhost:8081/pokedex/api/v1/pokemons/list/altura/{decimetros}
+> localhost:8081/pokedex/api/v1/pokemons/list/height/{decimetros}
 
 > localhost:8081/pokedex/api/v1/pokemons/delete/{id}
