@@ -17,4 +17,6 @@ public interface PokemonRepository extends MongoRepository<Pokemon, Integer> {
     @Query("{$and :[{height: ?0},{deleted: false}] }")
     List<Pokemon> findByHeightAndDeletedFalse(Integer height);
 
+    Boolean deleteByName(String Name);
+
 }

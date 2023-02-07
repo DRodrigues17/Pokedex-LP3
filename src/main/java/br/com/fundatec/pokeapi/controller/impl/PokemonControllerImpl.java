@@ -1,5 +1,6 @@
-package br.com.fundatec.pokeapi.controller;
+package br.com.fundatec.pokeapi.controller.impl;
 
+import br.com.fundatec.pokeapi.controller.IPokemonController;
 import br.com.fundatec.pokeapi.model.BaseResponse;
 import br.com.fundatec.pokeapi.service.PokemonService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,7 @@ import static org.springframework.http.HttpStatus.ACCEPTED;
 @RestController
 @RequestMapping("/pokemons")
 @RequiredArgsConstructor
-public class PokemonController {
+public class PokemonControllerImpl implements IPokemonController {
 
     private final PokemonService service;
 
@@ -43,37 +44,37 @@ public class PokemonController {
         );
     }
 
-    @GetMapping("/list/weight/{quilograma}")
-    public ResponseEntity<BaseResponse> findByWeight(@PathVariable("quilograma") int quilograma){
+    @GetMapping("/list/weight/{hectogramas}")
+    public ResponseEntity<BaseResponse> findByWeight(@PathVariable("hectogramas") int hectogramas){
         return ResponseEntity.ok(
                 BaseResponse.builder().timestamp(LocalDateTime.now())
                         .data(Map.of("pokemons", service
-                                .findByWeight(quilograma)))
-                        .message("pokemons presentes na API o peso de " + quilograma + "KG")
+                                .findByWeight(hectogramas)))
+                        .message("pokemons presentes na API o peso de " + hectogramas + " hectogramas")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value()).build()
         );
     }
 
-    @GetMapping("/list/height/{metros}")
-    public ResponseEntity<BaseResponse> findByHeigth(@PathVariable("metros") int metros){
+    @GetMapping("/list/height/{decimetros}")
+    public ResponseEntity<BaseResponse> findByHeight(@PathVariable("decimetros") int decimetros){
         return ResponseEntity.ok(
                 BaseResponse.builder().timestamp(LocalDateTime.now())
                         .data(Map.of("pokemons", service
-                                .findByHeight(metros)))
-                        .message("pokemons presentes na API com a altura de " + metros + " metros")
+                                .findByHeight(decimetros)))
+                        .message("pokemons presentes na API com a altura de " + decimetros + " decimetros")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value()).build()
         );
     }
 
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<BaseResponse> deleteById(@PathVariable("id") int id) {
+    @DeleteMapping("/delete/{name}")
+    public ResponseEntity<BaseResponse> deleteById(@PathVariable("id") String name) {
         return ResponseEntity.ok(
                 BaseResponse.builder()
                         .timestamp(LocalDateTime.now())
-                        .data(Map.of("deletado", service.deleteById(id)))
+                        .data(Map.of("deletado", service.deleteByName(name)))
                         .message("Este pokemon foi deletado")
                         .status(ACCEPTED).statusCode(ACCEPTED.value()).build()
         );

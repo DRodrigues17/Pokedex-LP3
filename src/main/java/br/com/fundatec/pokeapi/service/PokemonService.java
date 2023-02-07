@@ -44,8 +44,7 @@ public class PokemonService {
 
     }
 
-    public List<PokemonDTO> findByWeight(Integer quilogramas){
-        Integer hectogramas = quilogramas/10;
+    public List<PokemonDTO> findByWeight(Integer hectogramas){
         List<PokemonDTO> pokemonList = repository.findByWeightAndDeletedFalse(hectogramas)
                 .stream()
                 .map(pokemonConverter::convertToDTO)
@@ -56,8 +55,7 @@ public class PokemonService {
         return pokemonList;
     }
 
-    public List<PokemonDTO> findByHeight(Integer metros){
-        Integer decimetros = metros/10;
+    public List<PokemonDTO> findByHeight(Integer decimetros){
         List<PokemonDTO> pokemonList =repository.findByHeightAndDeletedFalse(decimetros)
                 .stream()
                 .map(pokemonConverter::convertToDTO)
@@ -68,8 +66,8 @@ public class PokemonService {
         return pokemonList;
     }
 
-    public boolean deleteById(int id) {
-         repository.deleteById(id);
+    public boolean deleteByName(String name) {
+         repository.deleteByName(name);
          return true;
     }
 
