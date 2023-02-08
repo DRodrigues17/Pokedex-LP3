@@ -70,7 +70,7 @@ public class PokemonControllerImpl implements IPokemonController {
 
 
     @DeleteMapping("/delete/{name}")
-    public ResponseEntity<BaseResponse> deleteById(@PathVariable("id") String name) {
+    public ResponseEntity<BaseResponse> deleteByName(@PathVariable("name") String name) {
         return ResponseEntity.ok(
                 BaseResponse.builder()
                         .timestamp(LocalDateTime.now())

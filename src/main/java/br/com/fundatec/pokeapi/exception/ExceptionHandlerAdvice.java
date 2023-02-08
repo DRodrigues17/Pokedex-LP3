@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.time.LocalDateTime;
 
@@ -39,10 +40,17 @@ public class ExceptionHandlerAdvice {
     }
 
     @ExceptionHandler(IllegalStateException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<ApiErrorDTO> handleEmptyList(Throwable e) {
         logger.error(e.getMessage());
         return new ResponseEntity<>(buildError("Nenhum pokemon se encaixa nesses parametros"), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ApiErrorDTO> handleConstraintError(Throwable e) {
+        logger.error(e.getMessage());
+        return new ResponseEntity<>(buildError("Este método espera um parametro de tipo diferente"), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(FeignException.class)

@@ -36,6 +36,9 @@ public interface IPokemonController {
             required = true,
             example = "50") int decimetros);
 
-    @Operation(description = "Deleta o pokemons que existe na api interna pelo nome")
-    ResponseEntity<BaseResponse> deleteById(String name);
+    @Operation(description = "Deleta o pokemon que existe na api pelo nome")
+    ResponseEntity<BaseResponse> deleteByName(@Parameter(schema = @Schema(implementation = String.class),
+            description = "nome do pokemon que você deseja deletar",
+            required = true,
+            example = "charmander") String name);
 }

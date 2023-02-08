@@ -23,5 +23,4 @@ public class Pokemon {
     private Collection<MovesDTO> moves;
     private boolean deleted;
     private LocalDateTime deletedAt;
-    private LocalDateTime updatedAt;
 }

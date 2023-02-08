@@ -3,13 +3,20 @@ package br.com.fundatec.pokeapi.service;
 import br.com.fundatec.pokeapi.client.PokemonClient;
 import br.com.fundatec.pokeapi.dto.PokemonDTO;
 import br.com.fundatec.pokeapi.dto.converter.PokemonConverter;
+import br.com.fundatec.pokeapi.exception.ObjectNotFoundException;
+import br.com.fundatec.pokeapi.model.DeleteLog;
+import br.com.fundatec.pokeapi.model.Pokemon;
+import br.com.fundatec.pokeapi.repository.DeleteLogRepository;
 import br.com.fundatec.pokeapi.repository.PokemonRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.webjars.NotFoundException;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +29,7 @@ public class PokemonService {
     private final PokemonRepository repository;
     private final PokemonClient client;
     private final PokemonConverter pokemonConverter;
+    private final DeleteLogRepository deleteLogRepository;
 
     public Optional<PokemonDTO> findById(Integer id) {
         Optional<PokemonDTO> pokemonOptional = repository.findByExternalIdAndDeletedFalse(id).map(pokemonConverter::convertToDTO);
@@ -67,8 +75,23 @@ public class PokemonService {
     }
 
     public boolean deleteByName(String name) {
-         repository.deleteByName(name);
-         return true;
+        Pokemon pokemon = repository.findByNameAndDeletedFalse(StringUtils.capitalize(name)).orElseThrow(()-> new ObjectNotFoundException(name));
+        pokemon.setDeleted(true);
+        pokemon.setDeletedAt(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
+
+        generateLog(pokemon.getExternalId(), pokemon.getName());
+        repository.save(pokemon);
+
+        return true;
+    }
+
+    public void generateLog (int pokemonId, String pokemonName){
+        deleteLogRepository.save(
+                DeleteLog.builder()
+                        .pokemonName(pokemonName)
+                        .pokemonId(pokemonId)
+                        .dateOfRemove(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")))
+                        .build());
     }
 
 }

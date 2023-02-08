@@ -26,7 +26,7 @@ These additional references should also help you:
 ### para acessar a api via swagger, acesse a seguinte url:
 >localhost:8081/pokedex/api/v1/swagger-ui.html
 
-### urls via bowrser ou postman/insomnia
+### urls via browser, se você quiser usar o postman, na pasta resources tem um arquivo json para importar as requisições
 > localhost:8081/pokedex/api/v1/pokemons/id/{id}
 
 > localhost:8081/pokedex/api/v1/pokemons/name/{name}
