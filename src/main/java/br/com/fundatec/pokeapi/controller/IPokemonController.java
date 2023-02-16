@@ -12,13 +12,13 @@ public interface IPokemonController {
     ResponseEntity<BaseResponse> findById(@Parameter(schema = @Schema(implementation = int.class),
             description = "Id do pokemon desejado",
             required = true,
-            example = "1")int id);
+            example = "1") int id);
 
     @Operation(description = "Retorna um pokemon pelo nome passado.")
     ResponseEntity<BaseResponse> findByName(@Parameter(schema = @Schema(implementation = String.class),
             description = "nome do pokemon desejado",
             required = true,
-            example = "charmander")String name);
+            example = "charmander") String name);
 
     @Operation(description = "Retorna uma lista de pokemons pelo peso. ATENÇÃO, a API que usei de base salva o" +
             " peso por hectogramas, então se for buscar por quilos adcione um 0 depois do numero, já que 1 quilo = " +
@@ -26,7 +26,7 @@ public interface IPokemonController {
     ResponseEntity<BaseResponse> findByWeight(@Parameter(schema = @Schema(implementation = Integer.class),
             description = "Peso desejado em hectogramas",
             required = true,
-            example = "50") int hectograma);
+            example = "50") int hectograms);
 
     @Operation(description = "Retorna uma lista de pokemons pela altura. ATENÇÃO, a API que usei de base salva a" +
             " altura por decimetros, então se for buscar por metros adcione um 0 depois do numero, já que 1 metro =" +
@@ -34,7 +34,7 @@ public interface IPokemonController {
     ResponseEntity<BaseResponse> findByHeight(@Parameter(schema = @Schema(implementation = Integer.class),
             description = "Altura desejada em decimetros",
             required = true,
-            example = "50") int decimetros);
+            example = "50") int decimeters);
 
     @Operation(description = "Deleta o pokemon que existe na api pelo nome")
     ResponseEntity<BaseResponse> deleteByName(@Parameter(schema = @Schema(implementation = String.class),

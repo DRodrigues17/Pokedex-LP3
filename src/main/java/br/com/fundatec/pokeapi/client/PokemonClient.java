@@ -1,4 +1,5 @@
 package br.com.fundatec.pokeapi.client;
+
 import br.com.fundatec.pokeapi.dto.PokemonDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

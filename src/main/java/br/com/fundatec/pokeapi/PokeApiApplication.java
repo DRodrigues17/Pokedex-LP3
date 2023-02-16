@@ -9,8 +9,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 public class PokeApiApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PokeApiApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(PokeApiApplication.class, args);
+    }
 
 }

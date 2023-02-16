@@ -17,9 +17,9 @@ public class ExceptionHandlerAdvice {
 
     private static final Logger logger = LoggerFactory.getLogger(ExceptionHandlerAdvice.class);
 
-    @ExceptionHandler(ObjectNotFoundException.class)
+    @ExceptionHandler(PokemonNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<ApiErrorDTO> handleNotFound(ObjectNotFoundException e) {
+    public ResponseEntity<ApiErrorDTO> handleNotFound(PokemonNotFoundException e) {
         logger.error(e.getMessage());
         return new ResponseEntity<>(buildError("pokemon não encontrado"), HttpStatus.NOT_FOUND);
     }
@@ -32,23 +32,23 @@ public class ExceptionHandlerAdvice {
                 HttpStatus.I_AM_A_TEAPOT);
     }
 
-    @ExceptionHandler(NotAllowedException.class)
+    @ExceptionHandler(PokemonAlreadyDeletedException.class)
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
-    public ResponseEntity<ApiErrorDTO> handleNotAllowed(Throwable e) {
+    public ResponseEntity<ApiErrorDTO> handleAlreadyDeleted(PokemonAlreadyDeletedException e) {
         logger.error(e.getMessage());
-        return new ResponseEntity<>(buildError("Este método é impossivel de ser realizado"), HttpStatus.METHOD_NOT_ALLOWED);
+        return new ResponseEntity<>(buildError("Este pokemon já foi deletado, logo não é possivel deletá-lo"), HttpStatus.METHOD_NOT_ALLOWED);
     }
 
     @ExceptionHandler(IllegalStateException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     public ResponseEntity<ApiErrorDTO> handleEmptyList(Throwable e) {
         logger.error(e.getMessage());
-        return new ResponseEntity<>(buildError("Nenhum pokemon se encaixa nesses parametros"), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(buildError("Nenhum pokemon se encaixa nesses parametros"), HttpStatus.NOT_ACCEPTABLE);
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<ApiErrorDTO> handleConstraintError(Throwable e) {
+    public ResponseEntity<ApiErrorDTO> handleConstraintError(MethodArgumentTypeMismatchException e) {
         logger.error(e.getMessage());
         return new ResponseEntity<>(buildError("Este método espera um parametro de tipo diferente"), HttpStatus.BAD_REQUEST);
     }
@@ -62,9 +62,11 @@ public class ExceptionHandlerAdvice {
                 String searchKey = getSearchKey(exception.request().url());
                 yield ResponseEntity.status(HttpStatus.valueOf(exception.status())).body(buildError("Não foi possivel encontrar pokemon " + searchKey));
             }
-            case 503 -> ResponseEntity.status(HttpStatus.valueOf(exception.status())).body(buildError("A API externa está indisponível"));
+            case 503 ->
+                    ResponseEntity.status(HttpStatus.valueOf(exception.status())).body(buildError("A API externa está indisponível"));
             case 502 -> ResponseEntity.status(HttpStatus.valueOf(exception.status())).body(buildError("Bad Gateway"));
-            default -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(buildError("Há algum erro que não conseguimos identificar"));
+            default ->
+                    ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(buildError("Há algum erro que não conseguimos identificar"));
         };
     }
 

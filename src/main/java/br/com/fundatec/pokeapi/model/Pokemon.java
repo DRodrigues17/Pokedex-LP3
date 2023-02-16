@@ -7,7 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
+import java.util.List;
 
 @Builder
 @Data
@@ -20,7 +20,7 @@ public class Pokemon {
     private String name;
     private int height;
     private int weight;
-    private Collection<MovesDTO> moves;
+    private List<MovesDTO> moves;
     private boolean deleted;
     private LocalDateTime deletedAt;
 }

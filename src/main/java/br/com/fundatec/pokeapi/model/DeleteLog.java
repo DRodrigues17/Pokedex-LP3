@@ -19,5 +19,4 @@ public class DeleteLog {
     private LocalDateTime dateOfRemove;
 
 
-
 }

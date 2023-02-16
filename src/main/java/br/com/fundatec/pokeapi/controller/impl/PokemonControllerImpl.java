@@ -44,25 +44,25 @@ public class PokemonControllerImpl implements IPokemonController {
         );
     }
 
-    @GetMapping("/list/weight/{hectogramas}")
-    public ResponseEntity<BaseResponse> findByWeight(@PathVariable("hectogramas") int hectogramas){
+    @GetMapping("/list/weight/{hectograms}")
+    public ResponseEntity<BaseResponse> findByWeight(@PathVariable("hectograms") int hectograms) {
         return ResponseEntity.ok(
                 BaseResponse.builder().timestamp(LocalDateTime.now())
                         .data(Map.of("pokemons", service
-                                .findByWeight(hectogramas)))
-                        .message("pokemons presentes na API o peso de " + hectogramas + " hectogramas")
+                                .findByWeight(hectograms)))
+                        .message("pokemons presentes na API o peso de " + hectograms + " hectogramas")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value()).build()
         );
     }
 
-    @GetMapping("/list/height/{decimetros}")
-    public ResponseEntity<BaseResponse> findByHeight(@PathVariable("decimetros") int decimetros){
+    @GetMapping("/list/height/{decimeters}")
+    public ResponseEntity<BaseResponse> findByHeight(@PathVariable("decimeters") int decimeters) {
         return ResponseEntity.ok(
                 BaseResponse.builder().timestamp(LocalDateTime.now())
                         .data(Map.of("pokemons", service
-                                .findByHeight(decimetros)))
-                        .message("pokemons presentes na API com a altura de " + decimetros + " decimetros")
+                                .findByHeight(decimeters)))
+                        .message("pokemons presentes na API com a altura de " + decimeters + " decimetros")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value()).build()
         );
