@@ -38,17 +38,17 @@ class PokemonControllerImplTest {
 
     @Test
     void shouldFindByIdSuccessfully() {
-        Mockito.when(service.findById(6)).thenReturn(Optional.of(PokemonStub.createPokemonDTOStub()));
-        get("/pokedex/api/v1/pokemons/id/{id}", 6)
+        Mockito.when(service.findById(17)).thenReturn(Optional.of(PokemonStub.createPokemonDTOStub()));
+        get("/pokedex/api/v1/pokemons/id/{id}", 17)
                 .then()
                 .statusCode(200)
                 .assertThat()
-                .body(containsString("\"statusCode\":200,\"status\":\"OK\",\"message\":\"pokemon presente na API com o id 6\",\"data\":{\"id\":{\"id\":6,\"name\":\"Charrizard\",\"height\":17,\"weight\":905,\"moves\":[{\"move\":{\"name\":\"fire-punch\""));
+                .body(containsString("\"statusCode\":200,\"status\":\"OK\",\"message\":\"pokemon presente na API com o id 17\",\"data\":{\"id\":{\"id\":17,\"name\":\"Pigeotto\",\"height\":11,\"weight\":300,\"moves\":[{\"move\":{\"name\":\"razor-wind\""));
 
     }
 
     @Test
-    void shouldThrowNotFoundWhenTryToFindById() {
+    void shouldThrowNotFoundWhenTryToFindByIdWithRandomNumber() {
         Mockito.when(service.findById(1123456)).thenThrow(PokemonNotFoundException.class);
         get("/pokedex/api/v1/pokemons/id/{id}", 1123456)
                 .then()
@@ -59,17 +59,17 @@ class PokemonControllerImplTest {
 
     @Test
     void shouldFindByNameSuccessfully() {
-        Mockito.when(service.findByName("charizard")).thenReturn(Optional.of(PokemonStub.createPokemonDTOStub()));
-        get("/pokedex/api/v1/pokemons/name/{name}", "charizard")
+        Mockito.when(service.findByName("pigeotto")).thenReturn(Optional.of(PokemonStub.createPokemonDTOStub()));
+        get("/pokedex/api/v1/pokemons/name/{name}", "pigeotto")
                 .then()
                 .statusCode(200)
                 .assertThat()
-                .body(containsString("\"statusCode\":200,\"status\":\"OK\",\"message\":\"pokemon presente na API com o nome charizard\",\"data\":{\"name\":{\"id\":6,\"name\":\"Charrizard\",\"height\":17,\"weight\":905,\"moves\":[{\"move\":{\"name\":\"fire-punch\""));
+                .body(containsString("\"statusCode\":200,\"status\":\"OK\",\"message\":\"pokemon presente na API com o nome pigeotto\",\"data\":{\"name\":{\"id\":17,\"name\":\"Pigeotto\",\"height\":11,\"weight\":300,\"moves\":[{\"move\":{\"name\":\"razor-wind\""));
 
     }
 
     @Test
-    void shouldThrowNotFoundWhenTryToFindByName() {
+    void shouldThrowNotFoundWhenTryToFindByNameWithRandomWord() {
         Mockito.when(service.findByName("daniel")).thenThrow(PokemonNotFoundException.class);
         get("/pokedex/api/v1/pokemons/name/{name}", "daniel")
                 .then()
@@ -85,11 +85,11 @@ class PokemonControllerImplTest {
                 .then()
                 .statusCode(200)
                 .assertThat()
-                .body(containsString("\"statusCode\":200,\"status\":\"OK\",\"message\":\"pokemons presentes na API o peso de 300 hectogramas\",\"data\":{\"pokemons\":[{\"id\":6,\"name\":\"Charrizard\""));
+                .body(containsString("\"statusCode\":200,\"status\":\"OK\",\"message\":\"pokemons presentes na API o peso de 300 hectogramas\",\"data\":{\"pokemons\":[{\"id\":17,\"name\":\"Pigeotto\""));
     }
 
     @Test
-    void ShouldThrowIllegalStateWhenTryToListByWeight() {
+    void ShouldThrowIllegalStateWhenTryToListByWeightAndListIsEmpty() {
         Mockito.when(service.findByWeight(777)).thenThrow(IllegalStateException.class);
         get("/pokedex/api/v1/pokemons/list/weight/{hectograms}", 777)
                 .then()
@@ -105,11 +105,11 @@ class PokemonControllerImplTest {
                 .then()
                 .statusCode(200)
                 .assertThat()
-                .body(containsString("\"statusCode\":200,\"status\":\"OK\",\"message\":\"pokemons presentes na API com a altura de 11 decimetros\",\"data\":{\"pokemons\":[{\"id\":6,\"name\":\"Charrizard\""));
+                .body(containsString("\"statusCode\":200,\"status\":\"OK\",\"message\":\"pokemons presentes na API com a altura de 11 decimetros\",\"data\":{\"pokemons\":[{\"id\":17,\"name\":\"Pigeotto\""));
     }
 
     @Test
-    void ShouldThrowIllegalStateWhenTryToListByHeight() {
+    void ShouldThrowIllegalStateWhenTryToListByHeightAndListIsEmpty() {
         Mockito.when(service.findByHeight(777)).thenThrow(IllegalStateException.class);
         get("/pokedex/api/v1/pokemons/list/height/{decimeters}", 777)
                 .then()
@@ -130,7 +130,7 @@ class PokemonControllerImplTest {
     }
 
     @Test
-    void shouldThrowNotFoundWhenTryToDeleteByName() {
+    void shouldThrowNotFoundWhenTryToDeleteInexistentPokemon() {
         Mockito.when(service.deleteByName("daniel")).thenThrow(PokemonNotFoundException.class);
         delete("/pokedex/api/v1/pokemons/delete/{name}", "daniel")
                 .then()
@@ -141,7 +141,7 @@ class PokemonControllerImplTest {
     }
 
     @Test
-    void shouldThrowAlreadyDeletedWhenTryToDeleteByName() {
+    void shouldThrowAlreadyDeletedWhenTryToDeleteAlreadyDeletedPokemon() {
         Mockito.when(service.deleteByName("daniel")).thenThrow(PokemonAlreadyDeletedException.class);
         delete("/pokedex/api/v1/pokemons/delete/{name}", "daniel")
                 .then()

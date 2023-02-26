@@ -7,14 +7,12 @@ import br.com.fundatec.pokeapi.model.Pokemon;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
-@SpringBootTest
 @ExtendWith(SpringExtension.class)
 class PokemonConverterTest {
 

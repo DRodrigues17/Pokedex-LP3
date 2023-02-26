@@ -1,32 +1,31 @@
-# Getting Started
+# POKEDEX
+Projeto criado na cadeira de LP3, é uma API de consulta de pokemons por id, nome, peso e altura.
+Na wiki estão registras todas as dependencias e técnologias do projeto. 
 
-### Reference Documentation
-For further reference, please consider the following sections:
+## Oque é preciso para executar o programa
+- Java (17 de preferência, pois é a versão utilzada no projeto)
+- Gradle 
+- Docker
+- Mongo (este é opcional, pois se você tem o docker instalado, pode só seguir o passo a passo que ele já será "instalado"
+  no caso de você ter mongo instalado, você não precisa de DOcker, mas eu fortemente recomendo que você utulize ou procure
+  aprender esta técnologia)
+- Um copilador ou IDE para executar o programa (eu recomendo o IntelliJ, pois com ele você já consegue instalar o gradle e o java sem problemas)
 
-* [Official Gradle documentation](https://docs.gradle.org)
-* [Spring Boot Gradle Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/3.0.0/gradle-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/3.0.0/gradle-plugin/reference/html/#build-image)
-* [Spring Data MongoDB](https://docs.spring.io/spring-boot/docs/3.0.0/reference/htmlsingle/#data.nosql.mongodb)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/3.0.0/reference/htmlsingle/#web)
+## Como executar o projeto
 
-### Guides
-The following guides illustrate how to use some features concretely:
+Primeiro, voce precisa clonar o repositório (estou considerando que você tem o conhecimento minimo de git, mas também se preferir pode baixar o zip).
+Depois disso, você deve abrir um terminal na pasta do porjeto e executar o seguinte comando
 
-* [Accessing Data with MongoDB](https://spring.io/guides/gs/accessing-data-mongodb/)
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
+> docker-compose up
 
-### Additional Links
-These additional references should also help you:
-
-* [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
-
+Com este comando, o container de mongo (banco de dados utilizado para este projeto) será criado e a aplicação
+poderá fazer seu trabalho sem problemas. 
+Após isso, basta executar a aplicação comsua IDE de preferência e acesssar alguma das URLs abaixo.
 
 ### para acessar a api via swagger, acesse a seguinte url:
 >localhost:8081/pokedex/api/v1/swagger-ui.html
 
-### urls via browser, se você quiser usar o postman, na pasta resources tem um arquivo json para importar as requisições
+### Urls via navegador, se você quiser usar o postman, na pasta src/main/resources tem um arquivojson para importar as requisições
 > localhost:8081/pokedex/api/v1/pokemons/id/{id}
 
 > localhost:8081/pokedex/api/v1/pokemons/name/{name}
