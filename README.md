@@ -30,8 +30,8 @@ Após isso, basta executar a aplicação comsua IDE de preferência e acesssar a
 
 > localhost:8081/pokedex/api/v1/pokemons/name/{name}
 
-> localhost:8081/pokedex/api/v1/pokemons/list/weight/{hectograma}
+> localhost:8081/pokedex/api/v1/pokemons/list/weight/{hectograms}
 
-> localhost:8081/pokedex/api/v1/pokemons/list/height/{decimetros}
+> localhost:8081/pokedex/api/v1/pokemons/list/height/{decimeters}
 
-> localhost:8081/pokedex/api/v1/pokemons/delete/{id}
+> localhost:8081/pokedex/api/v1/pokemons/delete/{name}
