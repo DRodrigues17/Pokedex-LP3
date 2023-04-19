@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Builder
 @Data
@@ -15,7 +16,7 @@ import java.util.List;
 public class Pokemon {
 
     @Id
-    private String id;
+    private UUID id;
     private Integer externalId;
     private String name;
     private int height;

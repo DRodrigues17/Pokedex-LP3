@@ -2,7 +2,7 @@ version: '3.1'
 services:
   mongodb:
     container_name: pokedex-mongo-db
-    image: mongo
+    image: docker.io/mongo
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
@@ -12,3 +12,11 @@ services:
       - "${HOME}/mongo_data:/data/db"
     ports:
       - "27017:27017"
+
+  pokedex-service:
+    container_name: poke-api
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"

@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.http.ResponseEntity;
 
-public interface IPokemonController {
+public interface PokemonController {
 
     @Operation(description = "Retorna um pokemon pelo id passado.")
     ResponseEntity<BaseResponse> findById(@Parameter(schema = @Schema(implementation = int.class),

@@ -10,7 +10,6 @@ import br.com.fundatec.pokeapi.model.Pokemon;
 import br.com.fundatec.pokeapi.repository.DeleteLogRepository;
 import br.com.fundatec.pokeapi.repository.PokemonRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +22,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 @Transactional
-@Slf4j
 public class PokemonService {
 
     private final PokemonRepository repository;

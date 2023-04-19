@@ -1,6 +1,6 @@
 package br.com.fundatec.pokeapi.controller.impl;
 
-import br.com.fundatec.pokeapi.controller.IPokemonController;
+import br.com.fundatec.pokeapi.controller.PokemonController;
 import br.com.fundatec.pokeapi.model.BaseResponse;
 import br.com.fundatec.pokeapi.service.PokemonService;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import static org.springframework.http.HttpStatus.ACCEPTED;
 @RestController
 @RequestMapping("/pokemons")
 @RequiredArgsConstructor
-public class PokemonControllerImpl implements IPokemonController {
+public class PokemonControllerImpl implements PokemonController {
 
     private final PokemonService service;
 

@@ -6,8 +6,9 @@ import org.springframework.data.mongodb.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface PokemonRepository extends MongoRepository<Pokemon, Integer> {
+public interface PokemonRepository extends MongoRepository<Pokemon, UUID> {
 
     @Query("{$and :[{externalId: ?0},{deleted: false}] }")
     Optional<Pokemon> findByExternalIdAndDeletedFalse(Integer externalId);
